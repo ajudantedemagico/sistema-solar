@@ -22,28 +22,28 @@ const PLANETAS: Planeta[] = [
   {
     id: "1",
     nome: "Mercúrio",
-    cor: "#A5A5A5",
+    cor: "#ff0000",
     info: "O menor planeta e o mais próximo do Sol.",
     img: require("../assets/images/2-mercurio.jpeg"),
   },
   {
     id: "2",
     nome: "Vênus",
-    cor: "#E3BB76",
+    cor: "#e8970c",
     info: "O planeta mais quente do sistema solar.",
     img: require("../assets/images/3-venus.jpeg"),
   },
   {
     id: "3",
     nome: "Terra",
-    cor: "#2271B3",
+    cor: "#099c10",
     info: "O único planeta conhecido com vida.",
     img: require("../assets/images/4-terra.jpeg"),
   },
   {
     id: "4",
     nome: "Marte",
-    cor: "#E27B58",
+    cor: "#fb0000",
     info: "Conhecido como o Planeta Vermelho.",
     img: require("../assets/images/5-marte.jpeg"),
   },
@@ -64,7 +64,7 @@ const PLANETAS: Planeta[] = [
   {
     id: "7",
     nome: "Urano",
-    cor: "#4FC3F7",
+    cor: "#080cd1",
     info: "O planeta que gira de lado em relação ao Sol.",
     img: require("../assets/images/8-urano.jpeg"),
   },
@@ -90,7 +90,7 @@ export default function SistemaSolar() {
         <Text style={styles.header}> Sistema Solar</Text>
 
         {selecionado ? (
-          <View style={[styles.card, { borderColor: selecionado.cor }]}> 
+          <View style={[styles.card, { borderColor: selecionado.cor }]}>
             <Image source={selecionado.img} style={styles.fotoGrande} />
             <Text style={styles.nomeGrande}>{selecionado.nome}</Text>
             <Text style={styles.descricao}>{selecionado.info}</Text>
@@ -102,7 +102,6 @@ export default function SistemaSolar() {
             </TouchableOpacity>
           </View>
         ) : (
-          /* 4. Lista de Planetas */
           <ScrollView contentContainerStyle={styles.lista}>
             {PLANETAS.map((planeta) => (
               <TouchableOpacity
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    color: "#fff",
+    color: "#e97909",
     fontWeight: "bold",
     textAlign: "center",
     marginVertical: 30,
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
   miniatura: { width: 60, height: 60, marginBottom: 10 },
   nomeItem: { color: "#fff", fontWeight: "600" },
   card: {
-    backgroundColor: "#1C1E2A",
+    backgroundColor: "#000313",
     padding: 30,
     borderRadius: 20,
     alignItems: "center",
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
   },
   botaoVoltar: {
     marginTop: 25,
-    backgroundColor: "#444",
+    backgroundColor: "#3f03a0",
     padding: 10,
     borderRadius: 8,
   },
