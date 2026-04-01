@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
   Image,
+  ImageBackground,
+  ImageSourcePropType,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,8 +10,15 @@ import {
   View,
 } from "react-native";
 
-// 1. Dados dos Planetas (Nossa "Base de Dados")
-const PLANETAS = [
+type Planeta = {
+  id: string;
+  nome: string;
+  cor: string;
+  info: string;
+  img: ImageSourcePropType;
+};
+
+const PLANETAS: Planeta[] = [
   {
     id: "1",
     nome: "Mercúrio",
@@ -38,50 +47,87 @@ const PLANETAS = [
     info: "Conhecido como o Planeta Vermelho.",
     img: require("../assets/images/5-marte.jpeg"),
   },
+  {
+    id: "5",
+    nome: "Júpiter",
+    cor: "#dd9076",
+    info: "O maior planeta do sistema solar.",
+    img: require("../assets/images/6-jupiter.jpeg"),
+  },
+  {
+    id: "6",
+    nome: "Saturno",
+    cor: "#f9c700",
+    info: "Segundo maior planeta do sistema solar.",
+    img: require("../assets/images/7-saturno.jpeg"),
+  },
+  {
+    id: "7",
+    nome: "Urano",
+    cor: "#4FC3F7",
+    info: "O planeta que gira de lado em relação ao Sol.",
+    img: require("../assets/images/8-urano.jpeg"),
+  },
+  {
+    id: "8",
+    nome: "Netuno",
+    cor: "#0288D1",
+    info: "O planeta mais distante do Sol.",
+    img: require("../assets/images/9-netuno.jpeg"),
+  },
 ];
 
 export default function SistemaSolar() {
-  // 2. Estado para saber qual planeta está selecionado
-  const [selecionado, setSelecionado] = useState(null);
+  const [selecionado, setSelecionado] = useState<Planeta | null>(null);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Explorador Espacial 🚀</Text>
+    <ImageBackground
+      source={require("../assets/images/background.jpeg")}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.header}> Sistema Solar</Text>
 
-      {/* 3. Área de Detalhes (Só aparece se clicar em um planeta) */}
-      {selecionado ? (
-        <View style={[styles.card, { borderColor: selecionado.cor }]}>
-          <Image source={{ uri: selecionado.img }} style={styles.fotoGrande} />
-          <Text style={styles.nomeGrande}>{selecionado.nome}</Text>
-          <Text style={styles.descricao}>{selecionado.info}</Text>
-          <TouchableOpacity
-            style={styles.botaoVoltar}
-            onPress={() => setSelecionado(null)}
-          >
-            <Text style={{ color: "#fff" }}>Fechar</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        /* 4. Lista de Planetas */
-        <ScrollView contentContainerStyle={styles.lista}>
-          {PLANETAS.map((planeta) => (
+        {selecionado ? (
+          <View style={[styles.card, { borderColor: selecionado.cor }]}> 
+            <Image source={selecionado.img} style={styles.fotoGrande} />
+            <Text style={styles.nomeGrande}>{selecionado.nome}</Text>
+            <Text style={styles.descricao}>{selecionado.info}</Text>
             <TouchableOpacity
-              key={planeta.id}
-              style={styles.item}
-              onPress={() => setSelecionado(planeta)}
+              style={styles.botaoVoltar}
+              onPress={() => setSelecionado(null)}
             >
-              <Image source={{ uri: planeta.img }} style={styles.miniatura} />
-              <Text style={styles.nomeItem}>{planeta.nome}</Text>
+              <Text style={{ color: "#fff" }}>Fechar</Text>
             </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-    </View>
+          </View>
+        ) : (
+          /* 4. Lista de Planetas */
+          <ScrollView contentContainerStyle={styles.lista}>
+            {PLANETAS.map((planeta) => (
+              <TouchableOpacity
+                key={planeta.id}
+                style={styles.item}
+                onPress={() => setSelecionado(planeta)}
+              >
+                <Image source={planeta.img} style={styles.miniatura} />
+                <Text style={styles.nomeItem}>{planeta.nome}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        )}
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#0B0D17", padding: 20 },
+  background: { flex: 1 },
+  overlay: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "rgba(0, 0, 0, 0.35)",
+  },
   header: {
     fontSize: 24,
     color: "#fff",
@@ -95,7 +141,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   item: {
-    backgroundColor: "#1C1E2A",
     width: "45%",
     padding: 20,
     borderRadius: 15,
