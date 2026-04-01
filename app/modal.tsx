@@ -15,28 +15,28 @@ const PLANETAS = [
     nome: "Mercúrio",
     cor: "#A5A5A5",
     info: "O menor planeta e o mais próximo do Sol.",
-    img: "https://flaticon.com",
+    img: require("../assets/images/2-mercurio.jpeg"),
   },
   {
     id: "2",
     nome: "Vênus",
     cor: "#E3BB76",
     info: "O planeta mais quente do sistema solar.",
-    img: "https://flaticon.com",
+    img: require("../assets/images/3-venus.jpeg"),
   },
   {
     id: "3",
     nome: "Terra",
     cor: "#2271B3",
     info: "O único planeta conhecido com vida.",
-    img: "https://flaticon.com",
+    img: require("../assets/images/4-terra.jpeg"),
   },
   {
     id: "4",
     nome: "Marte",
     cor: "#E27B58",
     info: "Conhecido como o Planeta Vermelho.",
-    img: "https://flaticon.com",
+    img: require("../assets/images/5-marte.jpeg"),
   },
 ];
 
